@@ -1,0 +1,29 @@
+#Create a namespace first and then create a pod in it
+---
+#Create the namespace production
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: production
+spec: {}
+status: {}
+
+---
+#Create the pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-prod
+  name: nginx-prod
+  namespace: production
+spec:
+  containers:
+  - image: nginx
+    name: nginx-prod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

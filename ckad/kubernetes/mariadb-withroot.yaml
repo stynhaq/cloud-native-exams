@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: mydb2
+  name: mydb2
+spec:
+  containers:
+  - env:
+    - name: MARIADB_ROOT_PASSWORD
+      value: Nigeria1
+    image: mariadb
+    name: mydb2
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
