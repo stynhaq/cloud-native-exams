@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: batch-job-parallel
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      completions: 3
+      parallelism: 2
+      template:
+        metadata:
+          name: job-from-cj
+        spec:
+          containers:
+          - command:
+            - date
+            image: busybox
+            name: batch-job-image
+            resources: {}
+          restartPolicy: Never

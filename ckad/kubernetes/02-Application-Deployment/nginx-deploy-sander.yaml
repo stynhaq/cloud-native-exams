@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-sander
+    type: proxy
+  name: nginx-sander
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx-sander
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      
+  template:
+    metadata:
+      labels:
+        app: nginx-sander
+    spec:
+      containers:
+      - image: nginx:1.9
+        name: nginx
+        resources: {}
+status: {}
