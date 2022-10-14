@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  containers:
+  - env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    image: mysql
+    name: mysql
+    resources: {}
+  subdomain: headless-service
+  hostname: mysql-backend
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

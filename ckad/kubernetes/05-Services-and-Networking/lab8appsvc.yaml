@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lab8appsvc
+  name: lab8appsvc
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lab8appsvc
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: lab8appsvc
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: lab8appsvc
+  name: lab8appsvc
+  namespace: default
+spec:
+  clusterIP: 10.97.135.108
+  clusterIPs:
+  - 10.97.135.108
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: lab8appsvc
+  sessionAffinity: None
+  type: ClusterIP
