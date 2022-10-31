@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: statefulset0
+  name: statefulset0
+spec:
+  clusterIP: None
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: statefulset0
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sset
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  serviceName: statefulset0
+  replicas: 3
+  minReadySeconds: 10
+  template
+

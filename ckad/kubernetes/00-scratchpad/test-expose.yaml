@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-expose
+    version: v1
+  name: test-expose
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-expose
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-expose
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
